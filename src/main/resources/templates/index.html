@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1 th:text="'Best of the year by ' + ${name}"></h1>
-</body>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<h1 th:text="'Best of the year by ' + ${name}"></h1>
+		
+		<div th:text="'The best movies of the year are: ' + ${movies}"></div>
+		
+		<div th:text="'The best songs of the year are: ' + ${songs}"></div>
+		
+		<div th:text="'You searched for the movie: ' + ${movie}"></div>
+		
+		<div th:text="'You searched for the song: ' + ${song}"></div>
+		
+	</body>
 </html>
