@@ -29,15 +29,6 @@ public class MyController {
 		return "index";
 	}
 	
-	@GetMapping("/user/{id}")
-	public String sayHelloToId(Model model,
-			@PathVariable("id") int id) {
-		
-		model.addAttribute("name", "Guybrush " + id);
-		
-		return "index";
-	}
-	
 	private List<Movie> getBestMovies() {
 		
 		List<Movie> movies = new ArrayList<Movie>();
@@ -88,7 +79,7 @@ public class MyController {
 		    }
 		}
 		
-		return "index";
+		return "movies";
 	}
 	
 	@GetMapping("/songs")
@@ -111,7 +102,7 @@ public class MyController {
 		    }
 		}
 		
-		return "index";
+		return "songs";
 	}
 	
 	@GetMapping("/movies/{id}")
@@ -124,7 +115,7 @@ public class MyController {
 		
 		model.addAttribute("movie", movie);
 		
-		return "index";
+		return "movie";
 	}
 	
 	@GetMapping("/songs/{id}")
@@ -137,7 +128,7 @@ public class MyController {
 		
 		model.addAttribute("song", song);
 		
-		return "index";
+		return "song";
 	}
 	
 }
