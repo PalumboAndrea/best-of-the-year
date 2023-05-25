@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,13 +21,78 @@ import com.example.demo.Song;
 public class MyController {
 
 	
-	@GetMapping("/bestOf")
-	public String sayHelloSp(Model model,
-			@RequestParam(name = "name") String name) {
+	@GetMapping("/home")
+	public String sayHelloSp(Model model) {
 		
-		model.addAttribute("name", name);
+		model.addAttribute("name", "Andrea");
 		
 		return "index";
+	}
+	
+	@GetMapping("/movies")
+	public String moviesView(Model model) {
+		
+		List<Movie> movies = getBestMovies();
+
+		model.addAttribute("movies", movies);
+		
+		return "movies";
+	}
+	
+	@GetMapping("/songs")
+	public String songsView(Model model) {
+		
+		List<Song> songs = getBestSongs();
+		
+		model.addAttribute("songs", songs);
+		
+		return "songs";
+	}
+	
+	@GetMapping("/movies/{id}")
+	public String singleMovieView(Model model,
+			@PathVariable("id") int id) {
+		
+		Movie movie = getMovieById(id);
+		if (movie != null) 
+			model.addAttribute("movie", movie);
+		
+		return "movie";
+	}
+	
+	@GetMapping("/songs/{id}")
+	public String singleSongView(Model model,
+			@PathVariable("id") int id) {
+		
+		Song song = getSongById(id);
+		if (song != null) 
+			model.addAttribute("song", song);
+		
+		return "song";
+	}
+	
+	private Movie getMovieById(int id) {
+		
+		Movie movie = null;
+		for (Movie m : getBestMovies()) {
+			if (m.getId() == id) {
+				movie = m;
+			}	
+		}
+		
+		return movie;
+	}
+	
+	private Song getSongById(int id) {
+		
+		Song song = null;
+		for (Song s : getBestSongs()) {
+			if (s.getId() == id) {
+				song = s;
+			}	
+		}
+		
+		return song;
 	}
 	
 	private List<Movie> getBestMovies() {
@@ -57,78 +123,6 @@ public class MyController {
 		songs.add(song3);
 		
 		return songs;
-	}
-	
-	@GetMapping("/movies")
-	public String moviesView(Model model) {
-		
-		List<Movie> movies = getBestMovies();
-		
-		String moviesString = "";
-		
-		int i = 0;
-		
-		for(Movie singleMovie : movies) {
-			
-			if(i++ == movies.size() - 1){
-				moviesString = moviesString + singleMovie.getTitle();
-				model.addAttribute("movies", moviesString);
-		    } else {
-		    	moviesString = moviesString + singleMovie.getTitle() + ", ";
-				model.addAttribute("movies", moviesString);
-		    }
-		}
-		
-		return "movies";
-	}
-	
-	@GetMapping("/songs")
-	public String songsView(Model model) {
-		
-		List<Song> songs = getBestSongs();
-		
-		String songsString = "";
-		
-		int i = 0;
-		
-		for(Song singleMovie : songs) {
-			
-			if(i++ == songs.size() - 1){
-				songsString = songsString + singleMovie.getTitle();
-				model.addAttribute("songs", songsString);
-		    } else {
-		    	songsString = songsString + singleMovie.getTitle() + ", ";
-				model.addAttribute("songs", songsString);
-		    }
-		}
-		
-		return "songs";
-	}
-	
-	@GetMapping("/movies/{id}")
-	public String singleMovieView(Model model,
-			@PathVariable("id") int id) {
-		
-		List<Movie> movies = getBestMovies();
-		
-		String movie = movies.get(id).getTitle();
-		
-		model.addAttribute("movie", movie);
-		
-		return "movie";
-	}
-	
-	@GetMapping("/songs/{id}")
-	public String singleSongView(Model model,
-			@PathVariable("id") int id) {
-		
-		List<Song> songs = getBestSongs();
-		
-		String song = songs.get(id).getTitle();
-		
-		model.addAttribute("song", song);
-		
-		return "song";
 	}
 	
 }

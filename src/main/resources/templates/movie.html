@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+		<meta charset="UTF-8">
+		<title>[[ ${movie.title} ]]</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
 	</head>
-	<body>
+	<body class="text-center container-fluid">
 		
-		<div th:text="'You searched for the movie: ' + ${movie}"></div>
+		<h1>You searched for the movie: [[ ${movie.title} ]]</h1>
 		
 	</body>
 </html>

@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	</head>
-	<body>
+		<meta charset="UTF-8">
+		<title>List of songs</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+		</head>
+	<body class="text-center container-fluid">
+	
+		<div class="d-flex">
+			<p class="m-0 me-4 d-flex align-items-center">
+				Best of
+			</p>
+			
+			<div class="d-flex">
+				<a class="border border-dark px-4 py-2 m-2 rounded-2 text-decoration-none" role="button" th:href="@{/movies}"
+				style="color: black">
+					Movies
+				</a>
+				<a class="border border-dark px-4 py-2 m-2 rounded-2 text-decoration-none" role="button" th:href="@{/songs}"
+				style="background-color: rgb(155,188,255); color: black;"
+				>
+					Songs
+				</a>
+			</div>
+		</div>
+	
+		<h1 class="text-center">The best songs of the year are:</h1>
 		
-		<div th:text="'The best songs of the year are: ' + ${songs}"></div>
+		<ul class="list-unstyled w-50 m-auto">
+			<li th:each="song : ${songs}" class="border border-dark">
+				<a th:href="@{/songs/{id} (id=${song.id})}">[[ ${song.getTitle()} ]]</a>
+			</li>
+		</ul>
+		
+		<div class="d-flex justify-content-center mt-3">
+			<a class="border border-dark px-4 py-2 rounded-2 text-decoration-none m-auto" role="button" th:href="@{/home}"
+			style="color: black">
+				Come back to home
+			</a>
+		</div>
 			
 	</body>
 </html>
